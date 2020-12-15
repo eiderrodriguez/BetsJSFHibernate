@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-dic-2020 12:40:27 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+	<!-- Zein taulatan EVENT, eta zutabeetan EVENTNUMBER(gakoa->generator),DESCRIPTION,EVENTDATE -->
+    <class name="domain.Event" table="EVENT">
+        <id name="eventNumber" type="java.lang.Integer">
+            <column name="EVENTNUMBER" />
+            <generator class="assigned" />
+        </id>
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" />
+        </property>
+        <property name="eventDate" type="java.util.Date">
+            <column name="EVENTDATE" />
+        </property>
+        <set name="questions" table="QUESTION" inverse="false" lazy="false" cascade="delete,save-update">
+            <key>
+                <column name="EVENT" />
+            </key>
+            <one-to-many class="domain.Question" />
+        </set>
+    </class>
+</hibernate-mapping>
